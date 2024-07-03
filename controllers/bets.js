@@ -3,11 +3,11 @@ const getAllBets = (req, res) => {
 }
 
 const createBet = (req, res) => {
-  res.send('create new bet')
+  res.json(req.body)
 }
 
 const getBet = (req, res) => {
-  res.send('get single bet')
+  res.json({ id: req.params.id })
 }
 
 const updateBet = (req, res) => {
