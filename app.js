@@ -20,6 +20,12 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/bets', bets)
 
+// app.get('/api/v1/bets', asyncWrapper(getAllBets)        - get all bets
+// app.post('/api/v1/bets', asyncWrapper(createBet)        - create new bet
+// app.get('/api/v1/bets/:id', asyncWrapper(getSingleBet)  - get single bet
+// app.patch('/api/v1/bets/:id', asyncWrapper(updateBet)   - update bet
+// app.delete('/api/v1/bets/:id', asyncWrapper(deleteBet)  - delete bet
+
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)
 
