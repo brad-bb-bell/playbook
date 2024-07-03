@@ -3,15 +3,22 @@ require('express-async-errors')
 
 const express = require('express')
 const app = express()
+const bets = require('./routes/bets')
 
 const connectDB = require('./db/connect')
+
+//middleware
+app.use(express.json())
 
 const notFoundMiddleware = require('./middleware/not-found')
 const errorMiddleware = require('./middleware/error-handler')
 
+//routes
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
+
+app.use('/api/v1/bets', bets)
 
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)
