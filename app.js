@@ -14,10 +14,6 @@ const notFoundMiddleware = require('./middleware/not-found')
 const errorMiddleware = require('./middleware/error-handler')
 
 //routes
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
 app.use('/api/v1/bets', bets)
 
 // app.get('/api/v1/bets', asyncWrapper(getAllBets)        - get all bets
