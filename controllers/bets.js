@@ -1,4 +1,4 @@
-const Bet = require('../models/Bets')
+const Bet = require('../models/bets')
 
 const getAllBets = (req, res) => {
   res.send('get all bets')
