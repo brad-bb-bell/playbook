@@ -1,4 +1,5 @@
-const Bet = require('../models/bets')
+const mongoose = require('mongoose')
+const Bet = require('../models/Bets')
 
 const getAllBets = async (req, res) => {
   try {
@@ -21,6 +22,9 @@ const createBet = async (req, res) => {
 const getBet = async (req, res) => {
   try {
     const { id: betID } = req.params
+    if (!mongoose.Types.ObjectId.isValid(betID)) {
+      return res.status(400).json({ msg: `Invalid ID format: ${betID}` })
+    }
     const bet = await Bet.findOne({ _id: betID })
     if (!bet) {
       return res.status(404).json({ msg: `No bet with ID: ${betID}` })
