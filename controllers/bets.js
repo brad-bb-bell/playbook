@@ -5,8 +5,12 @@ const getAllBets = (req, res) => {
 }
 
 const createBet = async (req, res) => {
-  const bet = await Bet.create(req.body)
-  res.status(201).json({ bet })
+  try {
+    const bet = await Bet.create(req.body)
+    res.status(201).json({ bet })
+  } catch (error) {
+    res.status(500).json({ msg: error })
+  }
 }
 
 const getBet = (req, res) => {
