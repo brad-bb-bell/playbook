@@ -1,7 +1,12 @@
 const Bet = require('../models/bets')
 
-const getAllBets = (req, res) => {
-  res.send('get all bets')
+const getAllBets = async (req, res) => {
+  try {
+    const bets = await Bet.find({})
+    res.status(200).json({ bets })
+  } catch (error) {
+    res.status(500).json({ msg: error })
+  }
 }
 
 const createBet = async (req, res) => {
@@ -13,8 +18,17 @@ const createBet = async (req, res) => {
   }
 }
 
-const getBet = (req, res) => {
-  res.json({ id: req.params.id })
+const getBet = async (req, res) => {
+  try {
+    const { id: betID } = req.params
+    const bet = await Bet.findOne({ _id: betID })
+    if (!bet) {
+      return res.status(404).json({ msg: `No bet with ID: ${betID}` })
+    }
+    res.status(200).json({ bet })
+  } catch (error) {
+    res.status(500).json({ msg: error })
+  }
 }
 
 const updateBet = (req, res) => {
