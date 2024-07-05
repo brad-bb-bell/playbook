@@ -1,9 +1,12 @@
+const Bet = require('../models/Bets')
+
 const getAllBets = (req, res) => {
   res.send('get all bets')
 }
 
-const createBet = (req, res) => {
-  res.json(req.body)
+const createBet = async (req, res) => {
+  const bet = await Bet.create(req.body)
+  res.status(201).json({ bet })
 }
 
 const getBet = (req, res) => {
