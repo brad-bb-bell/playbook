@@ -3,12 +3,12 @@ const mongoose = require('mongoose')
 const BetSchema = new mongoose.Schema({
   sport: {
     type: String,
-    required: true,
+    required: [true, 'must provide a sport'],
     enum: ['NFL', 'NBA'],
   },
   betType: {
     type: String,
-    required: true,
+    required: [true, 'must provide a bet type'],
     enum: [
       'spread',
       'moneyline',
@@ -21,19 +21,19 @@ const BetSchema = new mongoose.Schema({
   },
   team: {
     type: Array,
-    required: true,
+    required: [true, 'must provide a team'],
   },
   opponent: {
     type: Array,
-    required: true,
+    required: [true, 'must provide an opponent'],
   },
   odds: {
     type: String,
-    required: [true, 'You must provide odds'],
+    required: [true, 'must provide odds'],
   },
   betAmount: {
     type: Number,
-    required: [true, 'You must provide a bet amount'],
+    required: [true, 'must provide a bet amount'],
   },
   betPayout: {
     type: Number,
