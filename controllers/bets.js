@@ -45,7 +45,6 @@ const updateBet = async (req, res) => {
       new: true,
       runValidators: true,
     })
-
     res.status(200).json({ msg: 'Bet updated', data: bet })
   } catch (error) {
     res.status(500).json({ msg: error })
