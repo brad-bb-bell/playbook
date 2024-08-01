@@ -9,7 +9,7 @@ const mainRouter = require('./routes/main')
 const connectDB = require('./db/connect')
 
 const notFoundMiddleware = require('./middleware/not-found')
-const errorMiddleware = require('./middleware/error-handler')
+const errorHandlerMiddleware = require('./middleware/error-handler')
 
 //middleware
 app.use(express.json())
@@ -25,7 +25,7 @@ app.use('/api/v1', mainRouter)
 // app.delete('/api/v1/bets/:id', asyncWrapper(deleteBet)  - delete bet
 
 app.use(notFoundMiddleware)
-app.use(errorMiddleware)
+app.use(errorHandlerMiddleware)
 
 const port = process.env.PORT || 3000
 
