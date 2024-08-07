@@ -20,6 +20,8 @@ const login = async (req, res) => {
   const id = new Date().getDate()
 
   //try to keep payload small for better ux
+  //you should not store sensitive session data in browswer storage due to lack of security
+  //although it does look like you store the token in local storage
   const token = jwt.sign({ id, username }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   })
@@ -29,6 +31,7 @@ const login = async (req, res) => {
 }
 
 const dashboard = async (req, res) => {
+  console.log(req.headers)
   const luckyNumber = Math.floor(Math.random() * 100)
   res.status(200).json({
     msg: `Hello user.`,
