@@ -3,7 +3,7 @@ require('express-async-errors')
 
 const express = require('express')
 const app = express()
-const bets = require('./routes/bets')
+const betsRouter = require('./routes/bets')
 const mainRouter = require('./routes/main')
 
 const connectDB = require('./db/connect')
@@ -15,7 +15,7 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 app.use(express.json())
 
 //routes
-app.use('/api/v1/bets', bets)
+app.use('/api/v1/bets', betsRouter)
 app.use('/api/v1', mainRouter)
 
 // app.get('/api/v1/bets', asyncWrapper(getAllBets)        - get all bets
