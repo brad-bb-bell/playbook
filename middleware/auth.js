@@ -14,11 +14,9 @@ const authMiddleware = async (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET)
     const { userID, username } = payload
-    console.log('payload:', payload)
     req.user = { userID: userID, username: username }
     next()
   } catch (error) {
-    //token might be expired
     throw new UnauthenticatedError('Invalid authentication token')
   }
 }
