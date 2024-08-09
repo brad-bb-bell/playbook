@@ -65,6 +65,7 @@ const BetSchema = new mongoose.Schema(
       required: true,
     },
   },
+  //Adds createdAt and updatedAt fields
   { timestamps: true },
 )
 
