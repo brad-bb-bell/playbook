@@ -1,5 +1,7 @@
-const mongoose = require('mongoose')
 const Bet = require('../models/Bet')
+const { StatusCodes } = require('http-status-codes')
+const { BadRequestError, NotFoundError } = require('../errors')
+const mongoose = require('mongoose')
 
 const getAllBets = async (req, res) => {
   try {
@@ -12,8 +14,9 @@ const getAllBets = async (req, res) => {
 
 const createBet = async (req, res) => {
   try {
+    req.body.createdBy = req.user.userID
     const bet = await Bet.create(req.body)
-    res.status(201).json({ bet })
+    res.status(StatusCodes.CREATED).json({ bet })
   } catch (error) {
     res.status(500).json({ msg: error })
   }
