@@ -9,10 +9,6 @@ const authRouter = require('./routes/auth')
 const connectDB = require('./db/connect')
 const authenticateUser = require('./middleware/auth')
 
-//error handlers
-const notFoundMiddleware = require('./middleware/not-found')
-const errorHandlerMiddleware = require('./middleware/error-handler')
-
 //middleware
 app.use(express.json())
 
