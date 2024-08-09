@@ -54,7 +54,7 @@ const deleteBet = async (req, res) => {
   if (!bet) {
     throw new NotFoundError(`No bet with ID: ${betID}`)
   }
-  res.status(StatusCodes.OK).send()
+  res.status(StatusCodes.OK).json('Bet deleted successfully')
 }
 
 module.exports = { getAllBets, createBet, getBet, updateBet, deleteBet }
