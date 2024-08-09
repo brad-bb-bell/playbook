@@ -17,7 +17,6 @@ const errorHandlerMiddleware = require('./middleware/error-handler')
 app.use(express.json())
 
 //routes
-app.use('/api/v1', mainRouter)
 app.use('/api/v1/bets', betsRouter)
 app.use('/api/v1/auth', authRouter)
 
