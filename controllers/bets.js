@@ -15,19 +15,15 @@ const createBet = async (req, res) => {
 }
 
 const getBet = async (req, res) => {
-  try {
-    const {
-      user: { userID },
-      params: { id: betID },
-    } = req
-    const bet = await Bet.findOne({ _id: betID, createdBy: userID })
-    if (!bet) {
-      throw new NotFoundError(`No bet with ID: ${betID}`)
-    }
-    res.status(StatusCodes.OK).json({ bet })
-  } catch (error) {
-    res.status(500).json({ msg: error })
+  const {
+    user: { userID },
+    params: { id: betID },
+  } = req
+  const bet = await Bet.findOne({ _id: betID, createdBy: userID })
+  if (!bet) {
+    throw new NotFoundError(`No bet with ID: ${betID}`)
   }
+  res.status(StatusCodes.OK).json({ bet })
 }
 
 const updateBet = async (req, res) => {
