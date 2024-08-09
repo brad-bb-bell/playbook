@@ -21,15 +21,6 @@ app.use('/api/v1', mainRouter)
 app.use('/api/v1/bets', betsRouter)
 app.use('/api/v1/auth', authRouter)
 
-// app.get('/api/v1/bets', asyncWrapper(getAllBets)        - get all bets
-// app.post('/api/v1/bets', asyncWrapper(createBet)        - create new bet
-// app.get('/api/v1/bets/:id', asyncWrapper(getSingleBet)  - get single bet
-// app.patch('/api/v1/bets/:id', asyncWrapper(updateBet)   - update bet
-// app.delete('/api/v1/bets/:id', asyncWrapper(deleteBet)  - delete bet
-
-app.use(notFoundMiddleware)
-app.use(errorHandlerMiddleware)
-
 const port = process.env.PORT || 3000
 
 const start = async () => {
