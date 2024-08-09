@@ -1,25 +1,26 @@
+const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { UnauthenticatedError } = require('../errors/')
 
-const authenticationMiddleware = async (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    throw new UnauthenticatedError('No token provided')
-    //401 is authentication error
+    throw new UnauthenticatedError('Invalid authentication token')
   }
 
   const token = authHeader.split(' ')[1]
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const { id, username } = decoded
-    req.user = { id, username }
+    const payload = jwt.verify(token, process.env.JWT_SECRET)
+    const { userID, username } = payload
+    console.log('payload:', payload)
+    req.user = { userID: userID, username: username }
     next()
   } catch (error) {
     //token might be expired
-    throw new UnauthenticatedError('Not authorized to access this route')
+    throw new UnauthenticatedError('Invalid authentication token')
   }
 }
 
-module.exports = authenticationMiddleware
+module.exports = authMiddleware
