@@ -3,7 +3,6 @@ require('express-async-errors')
 
 const express = require('express')
 const app = express()
-const mainRouter = require('./routes/main')
 const betsRouter = require('./routes/bets')
 const authRouter = require('./routes/auth')
 
