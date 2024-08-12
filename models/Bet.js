@@ -20,6 +20,9 @@ const BetSchema = new mongoose.Schema(
         '3-team-teaser',
       ],
     },
+    line: {
+      type: String,
+    },
     team: {
       type: Array,
       required: [true, 'Must provide a team'],
