@@ -5,6 +5,8 @@ require('express-async-errors')
 const helmet = require('helmet')
 const cors = require('cors')
 const rateLimit = require('express-rate-limit')
+const bodyParser = require('body-parser')
+const { xss } = require('express-xss-sanitizer')
 
 const express = require('express')
 const app = express()
@@ -19,7 +21,19 @@ const authRouter = require('./routes/auth')
 //error handler
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
+app.set('trust proxy', 1)
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+  }),
+)
 app.use(express.json())
+app.use(bodyParser.json({ limit: '1kb' }))
+app.use(bodyParser.urlencoded({ extended: true, limit: '1kb' }))
+app.use(xss())
+app.use(helmet())
+app.use(cors())
 
 //routes
 app.use('/api/v1/bets', authenticateUser, betsRouter)
