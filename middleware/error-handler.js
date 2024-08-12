@@ -10,7 +10,6 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.statusCode = StatusCodes.BAD_REQUEST
     customError.msg = `Duplicate value entered for ${Object.keys(err.keyValue)} field, please choose another value`
   }
-  // return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err })
   return res.status(customError.statusCode).json({ msg: customError.msg })
 }
 
