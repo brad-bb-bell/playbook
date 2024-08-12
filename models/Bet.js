@@ -21,7 +21,7 @@ const BetSchema = new mongoose.Schema(
       ],
     },
     line: {
-      type: String,
+      type: Array,
     },
     team: {
       type: Array,
