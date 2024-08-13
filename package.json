@@ -4,7 +4,8 @@
   "description": "simple sports bet tracking api",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "Brad Bell",
   "license": "ISC",
