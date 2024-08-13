@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
   res.send('Playbook API')
 })
 //routes
-app.use('/api/v1/bets', authenticateUser, betsRouter)
+app.use('/api/v1/bets', betsRouter)
 app.use('/api/v1/auth', authRouter)
 
 //middleware

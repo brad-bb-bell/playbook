@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { authenticateUser } = require('../middleware/auth')
 
 const {
   getAllBets,
@@ -9,7 +10,15 @@ const {
   deleteBet,
 } = require('../controllers/bets')
 
-router.route('/').get(getAllBets).post(createBet)
-router.route('/:id').get(getBet).patch(updateBet).delete(deleteBet)
+//no auth
+router.route('/').get(getAllBets)
+router.route('/:id').get(getBet)
+
+//auth required
+router.route('/').post(authenticateUser, createBet)
+router
+  .route('/:id')
+  .patch(authenticateUser, updateBet)
+  .delete(authenticateUser, deleteBet)
 
 module.exports = router

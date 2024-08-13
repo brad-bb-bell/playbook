@@ -7,6 +7,12 @@ const BetSchema = new mongoose.Schema(
       required: [true, 'Must provide a sport'],
       enum: ['NFL', 'NBA'],
     },
+    season: {
+      type: Number,
+    },
+    week: {
+      type: Number,
+    },
     betType: {
       type: String,
       required: [true, 'Must provide a bet type'],
