@@ -21,6 +21,7 @@ const authRouter = require('./routes/auth')
 //error handler
 const errorHandlerMiddleware = require('./middleware/error-handler')
 
+//security
 app.set('trust proxy', 1)
 app.use(
   rateLimit({
@@ -35,6 +36,9 @@ app.use(xss())
 app.use(helmet())
 app.use(cors())
 
+app.get('/', (req, res) => {
+  res.send('Playbook API')
+})
 //routes
 app.use('/api/v1/bets', authenticateUser, betsRouter)
 app.use('/api/v1/auth', authRouter)
