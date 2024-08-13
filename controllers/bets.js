@@ -1,10 +1,12 @@
 const Bet = require('../models/Bet')
 const { StatusCodes } = require('http-status-codes')
-const { BadRequestError, NotFoundError } = require('../errors')
-const mongoose = require('mongoose')
+const { NotFoundError } = require('../errors')
 
 const getAllBets = async (req, res) => {
-  const bets = await Bet.find({ createdBy: req.user.userID }).sort('datePlaced')
+  //replaced req.user.userID with hardcoded value
+  const bets = await Bet.find({ createdBy: '66ba14a1adac04fe7fbc883c' }).sort(
+    'datePlaced',
+  )
   res.status(StatusCodes.OK).json({ bets, count: bets.length })
 }
 
@@ -15,11 +17,14 @@ const createBet = async (req, res) => {
 }
 
 const getBet = async (req, res) => {
+  //replaced userID with hardcoded value
   const {
-    user: { userID },
     params: { id: betID },
   } = req
-  const bet = await Bet.findOne({ _id: betID, createdBy: userID })
+  const bet = await Bet.findOne({
+    _id: betID,
+    createdBy: '66ba14a1adac04fe7fbc883c',
+  })
   if (!bet) {
     throw new NotFoundError(`No bet with ID: ${betID}`)
   }
