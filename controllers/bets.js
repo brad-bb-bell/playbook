@@ -106,4 +106,11 @@ const deleteBet = async (req, res) => {
   res.status(StatusCodes.OK).json('Bet deleted successfully')
 }
 
-module.exports = { getAllBets, createBet, getBet, updateBet, deleteBet }
+module.exports = {
+  getAllBets,
+  createBet,
+  getBet,
+  updateBet,
+  deleteBet,
+  normalizeBetTeams,
+}
