@@ -81,7 +81,23 @@ const updateBet = async (req, res) => {
     params: { id: betID },
   } = req
 
-  normalizeBetTeams(req.body)
+  if (req.body.team != null || req.body.opponent != null) {
+    // partial PATCHes may omit sport/betType — normalization needs the
+    // stored values to classify NFL vs NBA and futures correctly
+    let { sport, betType } = req.body
+    if (sport === undefined || betType === undefined) {
+      const existing = await Bet.findOne({ _id: betID, createdBy: userID })
+      if (!existing) {
+        throw new NotFoundError(`No bet with ID: ${betID}`)
+      }
+      sport = sport ?? existing.sport
+      betType = betType ?? existing.betType
+    }
+    const effective = { ...req.body, sport, betType }
+    normalizeBetTeams(effective)
+    if (req.body.team != null) req.body.team = effective.team
+    if (req.body.opponent != null) req.body.opponent = effective.opponent
+  }
   const bet = await Bet.findOneAndUpdate(
     { _id: betID, createdBy: userID },
     req.body,
