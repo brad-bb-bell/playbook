@@ -55,9 +55,10 @@ const PROMPT = `Extract the bet from this sportsbook ticket screenshot.
     .map(([abbr, name]) => `${name}=${abbr}`)
     .join(', ')}.
 - team[i] is the side bet on for leg i; opponent[i] is the other team; line[i] is the
-  spread or total as printed (e.g. "-3.5", "o47.5"). If the opponent is not shown for a
-  leg, use "" for that entry. For a future on a player or award, put the player/subject
-  in team and use "" for opponent.
+  spread or total as printed (e.g. "-3.5", "o47.5"). For a moneyline leg (printed as
+  "ML", "Moneyline", or "to win") line[i] is exactly "ML" — do not include that leg's
+  own odds. If the opponent is not shown for a leg, use "" for that entry. For a future
+  on a player or award, put the player/subject in team and use "" for opponent.
 - betType: exactly one of ${BET_TYPES.join(' | ')} (use 2-team-teaser or 3-team-teaser
   by leg count when the ticket is a teaser).
 - odds: the American odds for the whole ticket as a string (e.g. "-110", "+150").
