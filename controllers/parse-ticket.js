@@ -62,6 +62,9 @@ const PROMPT = `Extract the bet from this sportsbook ticket screenshot.
 - betType: exactly one of ${BET_TYPES.join(' | ')} (use 2-team-teaser or 3-team-teaser
   by leg count when the ticket is a teaser).
 - odds: the American odds for the whole ticket as a string (e.g. "-110", "+150").
+  American odds are never between -100 and +100: a price that pays less than even
+  money is negative (+85 is written "-118"). If the ticket only prints leg odds,
+  derive the combined price and write it the standard way.
 - betAmount: dollars risked. betPayout: NET profit if the bet wins — if the ticket shows
   total payout including the stake, subtract the stake.
 - season: the NFL season year the game belongs to. week: the NFL week number if it can
